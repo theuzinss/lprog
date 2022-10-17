@@ -1,49 +1,49 @@
 using System;
 
-class Aula2 {
-
-  public struct Aluno {
-    public string matricula;
-    public int periodo;
+class Aula1 {
+  public static double f(double x,
+                        double a,
+                        double b,
+                        double c) {
+    return a*Math.Pow(x,2) + b*x + c;
   }
-
-  public struct Disciplina {
-    public string nome;
-    public int semestre;
-  }
-
-  public static bool Matricular(Aluno aluno,
-                                Disciplina disciplina) {
-    return aluno.periodo == disciplina.semestre;
-  }
-
-  public static void Imprimir(Aluno aluno,
-                              Disciplina disciplina) {
-    if(Matricular(aluno, disciplina)) {
-      Console.WriteLine(aluno.matricula);
+  public static double[] zero(double a,
+                        double b,
+                        double c) {
+    double[] r = new double[2];
+    if(a != 0) {
+      double delta = Math.Pow(b,2) - (4*a*c);
+      if (delta >= 0) {
+        r[0] = (-b+Math.Sqrt(delta)) / (2*a);
+        r[1] = (-b-Math.Sqrt(delta)) / (2*a);
+      }
+    } else {
+      r[0] = -c/b;
     }
+    return r;
   }
-  
   public static void Main (string[] args) {
+    int v = 0;
+    Console.WriteLine(v);
     
-    Aluno aluno1 = new Aluno {
-      matricula = "012022",
-      periodo = 1
-    };
+    double z = f(1,2,3,4);
+    Console.WriteLine(z);
     
-    Aluno aluno2 = new Aluno {
-      matricula = "022022",
-      periodo = 3
-    };
+    double[] s = zero(1,2,3);
+    Console.WriteLine(s[0] + " " + s[1]);
     
-    Disciplina disciplina = new Disciplina {
-      nome = "Linguagem de Programação",
-      semestre = 3
-    };
+    double[] t = zero(1,4,2);
+    Console.WriteLine(t[0] + " " + t[1]);
 
-    Imprimir(aluno1, disciplina);
-    Imprimir(aluno2, disciplina);
+    int[,] m = new int[2,3]{
+      {1,2,3},
+      {4,5,6}
+    };
+    Console.WriteLine(m[0,1]);
 
+    foreach(int i in m) {
+      Console.WriteLine(i);
+    }
+    
   }
-  
 }
