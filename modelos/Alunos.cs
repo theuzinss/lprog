@@ -1,52 +1,55 @@
 namespace Modelos {
-  class Aluno : Pessoa {
-    //Nunca declarar um atributo público
-    private string matricula;
-    // private string nome;
-    private int periodo;
-    //Private: Outras classes não podem usar esse atributo
-    //Protected: Pode ser modificado por classes derivadas
-    //Internal: pode ser usado pelas pastas que estão dentro das classes do pacote namespace Modelos
 
-    public string Matricula {
-      get => this.matricula;
-      set => matricula = value;
-    }
-    
+  class Aluno : Pessoa {
+
+    private int periodo;
+
     public int Periodo {
       get => this.periodo;
       set {
-        if (value > 0) {
-        this.periodo = value;
+        if(value > 0) {
+          this.periodo = value;
+        } else {
+          this.periodo = 1;
+        }
       }
-        else {
-        this.periodo = 1;
-      }
-      }
-    }
-    //Retorna o valor do periodo 
-
-    public Aluno() : this(0) {
     }
 
-    public bool Matricular(Disciplina disciplina) {
-      return this.Periodo == disciplina.Semestre;
+    public string Matricula {
+      get; set;
     }
-    
+
+    public Aluno() : this(1) {
+    }
+
     public Aluno(int periodo) {
       this.Periodo = periodo;
     }
+
+    public Aluno(string nome, string matricula)
+      : this(1) {
+      this.Nome = nome;
+      this.Matricula = matricula;
+    }
+
+    public Aluno(string nome, string matricula, int periodo)
+      : this(periodo) {
+      this.Nome = nome;
+      this.Matricula = matricula;
+    }
     
-    public Aluno(string matricula, string nome) : 
-    this() {
-    this.Matricula  = matricula;
-    this.Nome = nome;
+    public bool Matricular(Disciplina disciplina) {
+      return this.Periodo == disciplina.Semestre;
+    }
+
+    public override bool Validar() {
+      return this.Matricula != null &&
+        this.Matricula.Length > 0;
+    }
+    
   }
-    
-    public Aluno(string matricula, string nome, int periodo)
-                : this(periodo) {
-        this.Matricula = matricula;
-        this.Nome = nome;
+  
+}
         }
 
     public override bool Validar() {
